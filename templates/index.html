@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindfulMe v2.0 - Advanced Analyzer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        /* --- Lovable.dev Style Replication (100%) --- */
+
+        /* 1. Full Dark Background and Gradient Effect */
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            color: #ffffff; /* Default text color for the page */
+        }
+        
+        body { 
+            background-color: #0d0d0d; /* Base dark color */
+            /* Replicating the blurred, dark gradient background */
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(30, 30, 40, 0.4) 0%, transparent 40%),
+                radial-gradient(at 100% 100%, rgba(58, 31, 10, 0.4) 0%, transparent 40%),
+                linear-gradient(to top, rgba(255, 126, 95, 0.1) 0%, transparent 60%); 
+            overflow: hidden; /* Prevent scrollbar on background */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        /* 2. Top Navigation Bar (Mockup) */
+        .top-nav {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            background-color: rgba(0, 0, 0, 0.1); /* Slightly translucent */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 100;
+        }
+        .top-nav a {
+            color: #ffffff;
+            text-decoration: none;
+            margin-right: 25px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+        .top-nav a:hover { opacity: 1; }
+        .top-nav .logo {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+        .top-nav .auth-buttons .btn {
+            font-size: 0.9rem;
+            border-radius: 8px;
+            padding: 8px 15px;
+        }
+        .top-nav .auth-buttons .btn-light {
+            background-color: #ffffff;
+            color: #1a1a1a;
+            border: none;
+        }
+
+        /* 3. Main Content Area (Chat/Landing) */
+        .main-content {
+            flex-grow: 1;
+            width: 100%;
+            max-width: 1000px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end; /* Push content to the bottom */
+            padding: 0 20px;
+            position: relative;
+        }
+
+        /* 4. Chat/Landing Text */
+        .landing-text {
+            text-align: center;
+            margin-bottom: 50vh; /* Pushes the title up high */
+            transform: translateY(-50%);
+            position: absolute;
+            top: 25%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 700px;
+        }
+        .landing-text h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            /* Simulating the subtle gradient on "Lovable" */
+            background: linear-gradient(45deg, #ff9966, #ff5e62);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline;
+        }
+        .landing-text p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* 5. Floating Input Bar (The most distinctive part) */
+        .chat-input-area {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 95%;
+            max-width: 800px; /* Wider input box */
+            padding: 15px;
+            background-color: #242424; /* Darker charcoal background */
+            border-radius: 18px; /* Rounded corners */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.08); /* Subtle border */
+        }
+        
+        .input-group {
+            display: flex;
+            align-items: flex-end; /* Align elements to the bottom of the group */
+        }
+        
+        .input-group input.form-control {
+            background-color: transparent;
+            border: none;
+            color: white;
+            padding: 10px 10px 10px 0; /* Adjusted padding */
+            height: auto;
+            resize: none; /* Disable resizing of textarea-like input */
+            font-size: 1rem;
+        }
+        .input-group input.form-control:focus {
+            box-shadow: none;
+            border-color: transparent;
+        }
+        .input-group input.form-control::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Input Bar Buttons (Attach/Public/Send) */
+        .input-group .attach-btn, 
+        .input-group .public-btn {
+            background-color: rgba(255, 255, 255, 0.1); /* Translucent dark button */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 5px 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-right: 8px;
+            display: flex;
+            align-items: center;
+        }
+        .input-group .attach-btn i { margin-right: 5px; }
+
+        .input-group .send-btn {
+            background-color: #ffffff; /* White send button */
+            color: #1a1a1a;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 10px;
+            transform: rotate(45deg); /* Rotated arrow for the up-right effect */
+        }
+        .input-group .send-btn:hover {
+            background-color: #f0f0f0;
+        }
+        
+        /* Message Area (Hidden/Overlaid on Landing for now) */
+        /* To display chat history, you would reveal this area */
+        .chat-box {
+            position: absolute;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 700px;
+            height: calc(100% - 200px);
+            overflow-y: auto;
+            padding-bottom: 100px; /* Space for the floating input */
+            display: none; /* Initially hidden, show when chat starts */
+        }
+        
+        /* To show the landing page initially, we will use the structure from the screenshot. 
+           Your original chat content structure is not visible in this landing page view. */
+
+        /* Utility style for bold text */
+        .bot-message b {
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="top-nav">
+        <div class="logo">MindfulMe v2.0</div>
+        <div class="nav-links d-none d-md-flex">
+            <a href="#">Community</a>
+            <a href="#">Pricing</a>
+            <a href="#">Enterprise</a>
+            <a href="#">Learn</a>
+            <a href="#">Launched</a>
+        </div>
+        <div class="auth-buttons">
+            <button class="btn btn-outline-light me-2 d-none d-sm-inline">Log in</button>
+            <button class="btn btn-light">Get started</button>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="landing-text">
+            <h2>Ask something <span style="color: #ff9966;">TO REMEMBER</span></h2>
+            <p>Always There To Remaind !!</p>
+        </div>
+        
+        <div class="chat-box" id="chat-box">
+             </div>
+
+        <div class="chat-input-area">
+            <form id="chat-form" class="input-group">
+                <button class="attach-btn" type="button" title="Attach File">
+                    <i class="fas fa-plus"></i> Attach
+                </button>
+                <button class="public-btn" type="button" title="Set to Public">
+                    Public
+                </button>
+                
+                <input type="text" id="user-input" class="form-control" placeholder="Ask Me" aria-label="User input">
+                
+                <button class="send-btn" type="submit" id="send-button">
+                    <i class="fas fa-arrow-up"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const chatForm = document.getElementById('chat-form');
+        const userInput = document.getElementById('user-input');
+        const chatBox = document.getElementById('chat-box');
+
+        // We will make the landing text disappear and the chat-box appear when the user sends the first message
+        const landingText = document.querySelector('.landing-text');
+        let chatStarted = false;
+
+        chatForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const userText = userInput.value.trim();
+            if (userText !== "") {
+                if (!chatStarted) {
+                    // Hide landing elements and show chat box on first message
+                    landingText.style.display = 'none';
+                    chatBox.style.display = 'flex'; // Show the chat history area
+                    chatStarted = true;
+                }
+                
+                displayUserMessage(userText);
+                sendToServer(userText);
+                userInput.value = ''; // Clear input field
+            }
+        });
+
+        // Function to display user message
+        function displayUserMessage(message) {
+            const userRow = document.createElement('div');
+            userRow.className = 'message-row';
+            const userDiv = document.createElement('div');
+            userDiv.className = 'user-message';
+            userDiv.textContent = message;
+            
+            userRow.appendChild(userDiv);
+            chatBox.appendChild(userRow);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        // The old sendToServer function (renamed for clarity)
+        function sendToServer(message) {
+            // 1. Display a temporary loading message for the bot
+            const loadingRow = document.createElement('div');
+            loadingRow.className = 'message-row';
+            const loadingDiv = document.createElement('div');
+            loadingDiv.className = 'bot-message';
+            loadingDiv.innerHTML = '<i class="fas fa-ellipsis-h fa-beat-fade"></i>'; // Loading dots
+            loadingDiv.id = 'loading-message'; // Give it an ID to find and remove it later
+            loadingRow.appendChild(loadingDiv);
+            chatBox.appendChild(loadingRow);
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            fetch("/get", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `msg=${encodeURIComponent(message)}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                // 2. Remove the loading message
+                const loadingMessage = document.getElementById('loading-message');
+                if (loadingMessage) {
+                    loadingMessage.parentElement.remove(); // Remove the row containing the loading message
+                }
+                
+                // 3a. Check for the special 'export_trigger' response
+                if (data.response === 'export_trigger') {
+                    // Trigger the download
+                    const downloadLink = document.createElement('a');
+                    downloadLink.href = '/download_logs';
+                    downloadLink.download = 'mindfulme_activity_log.csv';
+                    document.body.appendChild(downloadLink);
+                    downloadLink.click();
+                    document.body.removeChild(downloadLink);
+
+                    // Display a confirmation message in the chat
+                    const botRow = document.createElement('div');
+                    botRow.className = 'message-row';
+                    const botDiv = document.createElement('div');
+                    botDiv.className = 'download-message'; 
+                    botDiv.textContent = "✅ Download initiated! Check your browser's downloads folder.";
+                    botRow.appendChild(botDiv);
+                    
+                    chatBox.appendChild(botRow);
+
+                } else {
+                    // 3b. Display standard bot response
+                    const botRow = document.createElement('div');
+                    botRow.className = 'message-row';
+                    const botDiv = document.createElement('div');
+                    botDiv.className = 'bot-message';
+                    // Replaces **text** with <b>text</b>
+                    botDiv.innerHTML = data.response.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>'); 
+                    
+                    botRow.appendChild(botDiv);
+                    chatBox.appendChild(botRow);
+                }
+
+                chatBox.scrollTop = chatBox.scrollHeight;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Ensure loading message is removed even on error
+                const loadingMessage = document.getElementById('loading-message');
+                if (loadingMessage) {
+                    loadingMessage.parentElement.remove();
+                }
+                
+                const botRow = document.createElement('div');
+                botRow.className = 'message-row';
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'bot-message';
+                errorDiv.textContent = '❌ Sorry, a system error occurred. Check the VS Code terminal for details.';
+                botRow.appendChild(errorDiv);
+                chatBox.appendChild(botRow);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            });
+        }
+    </script>
+</body>
+</html>
